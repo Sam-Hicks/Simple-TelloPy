@@ -31,11 +31,11 @@ while True:
     pygame.event.get()
 
     if joystick_count != 0:
-        rightsticky = gamepad.get_axis(1)
-        leftsticky = gamepad.get_axis(4)
+        rightsticky = gamepad.get_axis(3)
+        leftsticky = gamepad.get_axis(1)
 
-        rightstickx = gamepad.get_axis(0)
-        leftstickx = gamepad.get_axis(3)
+        rightstickx = gamepad.get_axis(4)
+        leftstickx = gamepad.get_axis(0)
         Start = gamepad.get_button(7)
         Back = gamepad.get_button(6)
         x, y = gamepad.get_hat(0)
@@ -45,46 +45,43 @@ while True:
         A = gamepad.get_button(0)
         B = gamepad.get_button(1)
     
-
-  
    
     
    
-
+    #Takeoff for the drone
     if Start == 1:
         print('Start pressed')
         drone.takeoff1()
     
+    #Landing for the drone
     if Back == 1:
         drone.land()
         print('Back pressed')
-    if abs(leftsticky) > .05:
+
+    #Controls the forward and backward tilt of the drone (Positive value makes the drone move forward)
+    if abs(rightsticky) > .05:
        
-        drone.pitch(-leftsticky)
+        drone.pitch(-rightsticky)
     else:
         drone.pitch(0)
-    if abs(rightsticky) > .05:
+
+    #Controls the vertical up and down motion of the drone (Positive value makes the drone move up)
+    if abs(leftsticky) > .05:
       
-        drone.throttle(-rightsticky)
+        drone.throttle(-leftsticky)
     else:
         drone.throttle(0)
         
-    if abs(leftstickx) > .05:
-        print("call")
-        drone.roll(leftstickx)
+    #Controls the side to side tilt of the drone (Positive value makes the drone move to the right)
+    if abs(rightstickx) > .05:
+        drone.roll(rightstickx)
     else:
         drone.roll(0)
         
-    if abs(rightstickx) > .05:
-        drone.yaw(rightstickx)
+    #Controls the left and right rotation of the drone (Positive value makes the drone turn right)
+    if abs(leftstickx) > .05:
+        drone.yaw(leftstickx)
     else:
         drone.yaw(0)
     
     sleep(.02)
-
-
-
-
-
-
-
